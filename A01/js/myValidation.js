@@ -14,31 +14,37 @@ const maxInput = 50;
             titel: {
                 required: true,
                 minlength: minInput,
-                maxlength: maxInput
+                maxlength: maxInput,
+                noSpace: true
             },
             autor: {
                 required: true,
                 minlength: minInput,
-                maxlength: maxInput
+                maxlength: maxInput,
+                noSpace: true
             },
             jahr: {
                 required: true,
                 digits: true,
-                max: currentYear // aktuelles Jahr Buch kann nicht aus der Zukunft stammen
+                max: currentYear, // aktuelles Jahr Buch kann nicht aus der Zukunft stammen
+                noSpace: true
             },
             seiten: {
                 required: true,
                 digits: true,
-                min: 1
+                min: 1,
+                noSpace: true
             },
             verlag: {
                 required: true,
                 minlength: minInput,
-                maxlength: maxInput
+                maxlength: maxInput,
+                noSpace: true
             },
             preis: {
                 required: true,
                 price: true, // custom Method for price
+                noSpace: true
             }
         },
         messages: {
@@ -90,6 +96,10 @@ jQuery.validator.addMethod(
     "Bitte geben Sie einen gültigen Preis ein! (mit Komma und gleich kleiner 100.000)"
 );
 
+jQuery.validator.addMethod("noSpace", function(value, element) { 
+    return value == '' || value.trim().length != 0;  
+}, "Bitte keine Leerzeichen eingeben!");
+
 /*Contact form*/
 function validateContactform(kontaktForm){
     kontaktForm.validate({
@@ -97,28 +107,33 @@ function validateContactform(kontaktForm){
             vorname: {
                 required: true,
                 minlength: minInput,
-                maxlength: maxInput
+                maxlength: maxInput,
+                noSpace: true
             },
             nachname: {
                 required: true,
                 minlength: minInput,
-                maxlength: maxInput
+                maxlength: maxInput,
+                noSpace: true
             },
             email: {
                 required: true,
                 minlength: minInput,
                 maxlength: maxInput,
                 email: true,
+                noSpace: true            
             },
             betreff: {
                 required: true,
                 minlength: minInput,
-                maxlength: maxInput
+                maxlength: maxInput,
+                noSpace: true
             },
             message: {
                 required: true,
                 minlength: minInput,
-                maxlength: maxInput
+                maxlength: maxInput,
+                noSpace: true
             }
 
         },
