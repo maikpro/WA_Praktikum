@@ -1,0 +1,62 @@
+main {
+  padding: 20px;
+}
+
+.carousel-control-next button {
+  color: #000;
+}
+
+.carousel-control-next-icon,
+.carousel-control-prev {
+  filter: invert(1);
+}
+
+#carouselExampleIndicators > div.carousel-indicators > button {
+  background-color: #f00;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.carousel-inner {
+  text-align: center;
+}
+
+.action-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  margin-bottom: 20px;
+}
+
+.kontakt {
+  padding: 100px;
+}
+
+.kontakt h1 {
+  margin-bottom: 30px;
+}
+
+.kontakt input,
+.kontakt textarea {
+  margin: 10px 0 10px 0;
+}
+
+#kontaktForm > div:nth-child(5) > div {
+  text-align: end;
+}
+
+#notification {
+  display: none;
+  border: 5px solid green;
+  padding: 20px;
+  background: green;
+  margin-top: 20px;
+  color: white;
+}
+
+.error {
+  color: #f00;
+}
