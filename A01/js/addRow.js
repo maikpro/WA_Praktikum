@@ -42,6 +42,7 @@ function addRow(){
     $.each(addRowFormArray, (i, field) => {
         console.log(field)
         $('#newrow-' + bookRowsLength).append(
+            // Füge € hinter Preis ein falls Preisfeld
             field.name !== "preis" ? "<td>" + field.value + "</td>" : "<td>" + field.value + "€</td>"
         );
     });
