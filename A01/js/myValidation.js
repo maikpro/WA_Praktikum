@@ -93,7 +93,7 @@ jQuery.validator.addMethod(
         var isValidMoney = /^\d{0,6}(\,\d{0,2})?$/.test(value); // Bsp: 100000,99
         return this.optional(element) || isValidMoney;
     },
-    "Bitte geben Sie einen gültigen Preis ein! (mit Komma und gleich kleiner 100.000)"
+    "Bitte geben Sie einen gültigen Preis ein! (mit Komma und kleiner gleich 100.000)"
 );
 
 jQuery.validator.addMethod("noSpace", function(value, element) { 
