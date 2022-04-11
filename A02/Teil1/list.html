@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coolbooks - Bücher</title>
+    <link rel="stylesheet" href="https://bootswatch.com/5/lux/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="./index.html">
+          <div class="logo">
+            <i class="fa-solid fa-book"></i> Coolbooks
+         </div> 
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarColor01">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="./index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="./list.html">Bücher
+                <span class="visually-hidden">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./bewertungen.html">Bewertungen</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./kontakt.html">Kontakt</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!--NAVIGATION-->
+  </header>
+  <main>
+      <div class="container">
+
+        <div class="action-container">
+          <div class="action-buttons">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <i class="fa-solid fa-plus"></i> Buch hinzufügen
+            </button>
+
+            <!--Clear Localstorage-->
+            <button type="button" class="btn btn-primary" id="clearStorageBtn">
+              <i class="fa-solid fa-trash"></i> Localstorage leeren
+            </button>
+          </div>
+        </div>
+        
+
+        <!--Book Table-->
+          <table id="bookTable" class="table table-hover table-dark table-striped">
+              <thead>
+                <tr>
+                    <!--Autor,Titel, Erscheinungsjahr, Seiten, Verlag-->
+                  <th scope="col">#</th>
+                  <th scope="col">Titel</th>
+                  <th scope="col">Autor</th>
+                  <th scope="col">Erscheinungsjahr</th>
+                  <th scope="col">Seiten</th>
+                  <th scope="col">Verlag</th>
+                  <th scope="col">Preis</th>
+                </tr>
+              </thead>
+              <tbody id="bookrows">
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Algorithmen in Java</td>
+                  <td>David Kopec</td>
+                  <td>2021</td>
+                  <td>333</td>
+                  <td>Rheinwerk Verlag GmbH</td>
+                  <td>29,90€</td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td>PHP 8 und MySQL</td>
+                  <td>Christian Wenz, Tobias Hauser</td>
+                  <td>2021</td>
+                  <td>1075</td>
+                  <td>Rheinwerk Verlag GmbH</td>
+                  <td>49,90€</td>
+                </tr>
+                <tr>
+                  <th scope="row">3</th>
+                  <td>C# 8 mit Visual Studio 2019</td>
+                  <td>Andreas Kühnel</td>
+                  <td>2019</td>
+                  <td>1478</td>
+                  <td>Rheinwerk Verlag GmbH</td>
+                  <td>49,90€</td>
+                </tr>
+                <tr>
+                  <th scope="row">4</th>
+                  <td>HTML & CSS für Dummies</td>
+                  <td>Florence Maurice </td>
+                  <td>2019</td>
+                  <td>428</td>
+                  <td>Wiley-VCH</td>
+                  <td>24,99€</td>
+                </tr>
+                <tr>
+                  <th scope="row">5</th>
+                  <td>Das Curry-Buch - Funktional programmieren lernen mit JavaScript</td>
+                  <td>Jens Ohlig, Stefanie Schirmer, Hannes Mehnert</td>
+                  <td>2013</td>
+                  <td>208</td>
+                  <td>O'Reilly Verlag GmbH & Co. KG</td>
+                  <td>29,90€</td>
+                </tr>
+              </tbody>
+            </table>
+      </div>
+      <!--LISTE-->
+
+      <!--Modal-->
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Buch hinzufügen</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              
+              <!--FORM-->
+              <form id="addRow">
+                  <div class="modal-body">
+                      <!--Titel-->
+                      <label class="form-label" for="titel">Titel</label>
+                      <input class="form-control" type="text" name="titel">
+                    
+                      <!--Autor-->
+                      <label class="form-label" for="autor">Autor</label>
+                      <input class="form-control" type="text" name="autor">
+
+                      <!--Erscheinungsjahr-->
+                      <label class="form-label" for="jahr">Erscheinungsjahr</label>
+                      <input class="form-control" type="text" name="jahr">
+                      
+                      <!--Seiten-->
+                      <label class="form-label" for="seiten">Seiten</label>
+                      <input class="form-control" type="text" name="seiten">
+
+                      <!--Verlag-->
+                      <label class="form-label" for="verlag">Verlag</label>
+                      <input class="form-control" type="text" name="verlag">
+                      
+                      <!--Preis-->
+                      <label class="form-label" for="preis">Preis</label>
+                      <input class="form-control" type="text" name="preis">
+                  </div>
+
+                  <div class="modal-footer">
+                      <button type="submit" class="btn btn-primary">Hinzufügen</button>
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
+                  </div>
+              </form>
+            </div>
+          </div>
+      </div>
+
+      <div id="output"></div>
+
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <!--jQuery Form Validation-->
+  <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+  <script src="./js/localStorageControl.js"></script>
+  <script src="./js/addRow.js"></script>
+  <script src="./js/myValidation.js"></script>
+</body>
+</html>

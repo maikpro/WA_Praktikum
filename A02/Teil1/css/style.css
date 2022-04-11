@@ -1,0 +1,99 @@
+.logo:hover {
+  color: rgb(1, 162, 255);
+}
+
+.navbar-dark .navbar-nav .nav-link.active {
+  color: rgb(1, 162, 255);
+}
+
+main {
+  padding: 20px;
+}
+
+.carousel-indicators {
+  bottom: -50px;
+}
+
+.carousel-control-next button {
+  color: #000;
+}
+
+.carousel-control-next-icon,
+.carousel-control-prev {
+  filter: invert(1);
+}
+
+#carouselExampleIndicators > div.carousel-indicators > button {
+  background-color: rgb(1, 162, 255);
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.carousel-inner {
+  text-align: center;
+}
+
+.card:hover {
+  transform: scale(1.01);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08), 0 0 6px rgba(0, 0, 0, 0.05);
+  transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
+    0.3s box-shadow,
+    0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
+  cursor: pointer;
+}
+
+.rating {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.stars {
+  color: rgb(1, 162, 255);
+}
+
+.action-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  margin-bottom: 20px;
+}
+
+.kontakt {
+  padding: 100px;
+}
+
+.kontakt h1 {
+  margin-bottom: 30px;
+}
+
+.kontakt input,
+.kontakt textarea {
+  margin: 10px 0 10px 0;
+}
+
+#kontaktForm > div:nth-child(5) > div {
+  text-align: end;
+}
+
+#notification {
+  display: none;
+  border: 5px solid green;
+  padding: 20px;
+  background: green;
+  margin-top: 20px;
+  color: white;
+}
+
+.error {
+  color: #f00;
+}
