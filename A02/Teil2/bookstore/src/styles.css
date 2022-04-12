@@ -67,6 +67,12 @@
     justify-content: end;
     margin-bottom: 20px;
   }
+
+  .action-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 35%;
+  }
   
   .kontakt {
     padding: 100px;
