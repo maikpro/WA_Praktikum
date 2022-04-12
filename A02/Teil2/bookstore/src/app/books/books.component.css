@@ -1,0 +1,12 @@
+.edit, .delete {
+    text-align: center;
+    cursor: pointer;
+}
+
+.edit:hover {
+    color: rgb(255, 174, 0);
+}
+
+.delete:hover {
+    color: rgb(255, 0, 0);
+}

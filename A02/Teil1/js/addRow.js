@@ -3,7 +3,7 @@ const table = $('#bookTable');
 const addRowForm = $('#addRow');
 let bookRowsLength;
 
-$(document).ready(function(){
+    $(document).ready(function(){
     bookRowsLength = $("#bookrows > tr").length;
 
     // Check if data is in Localstorage and load into Table
