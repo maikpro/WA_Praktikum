@@ -25,7 +25,7 @@ export class BooksComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.loadFromLocalStorage();
     this.lastId = this.rowData[this.rowData.length-1].id;
     console.log(this.lastId);

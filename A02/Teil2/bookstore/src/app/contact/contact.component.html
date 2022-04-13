@@ -1,1 +1,96 @@
-<p>contact works!</p>
+<div class="container">
+    <div class="kontakt">
+        <h1>Kontakt</h1>
+        <form [formGroup]="this.contactForm" id="kontaktForm">
+            <div class="row">
+                <div class="col">
+                    <input type="text" class="form-control" name="vorname" formControlName="firstname" placeholder="Vorname" aria-label="Vorname">
+                    <div *ngIf="this.contactForm.get('firstname')?.invalid && this.contactForm.get('firstname')?.errors && 
+                    (this.contactForm.get('firstname')?.dirty || this.contactForm.get('firstname')?.touched)">
+                        <small class="text-danger"
+                        *ngIf="this.contactForm.get('firstname')?.hasError('required')">
+                        Das Feld ist erforderlich.
+                        </small>
+                    </div>
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" name="nachname" formControlName="lastname" placeholder="Nachname" aria-label="Nachname">
+                    <div *ngIf="this.contactForm.get('lastname')?.invalid && this.contactForm.get('lastname')?.errors && 
+                    (this.contactForm.get('lastname')?.dirty || this.contactForm.get('lastname')?.touched)">
+                        <small class="text-danger"
+                        *ngIf="this.contactForm.get('lastname')?.hasError('required')">
+                        Das Feld ist erforderlich.
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <input type="email" class="form-control" name="email" formControlName="email" placeholder="E-Mail" aria-label="E-Mail">
+                    <div *ngIf="this.contactForm.get('email')?.invalid && this.contactForm.get('email')?.errors && 
+                    (this.contactForm.get('email')?.dirty || this.contactForm.get('email')?.touched)">
+                        <small class="text-danger"
+                        *ngIf="this.contactForm.get('email')?.hasError('required')">
+                        Das Feld ist erforderlich.
+                        </small>
+                        <small class="text-danger" *ngIf="this.contactForm.get('email')?.hasError('email')">
+                            Es muss eine gültige E-Mail sein.
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <input type="text" class="form-control" name="betreff" formControlName="subject" placeholder="Betreff" aria-label="Betreff">
+                    <div *ngIf="this.contactForm.get('subject')?.invalid && this.contactForm.get('subject')?.errors && 
+                    (this.contactForm.get('subject')?.dirty || this.contactForm.get('subject')?.touched)">
+                        <small class="text-danger"
+                        *ngIf="this.contactForm.get('subject')?.hasError('required')">
+                        Das Feld ist erforderlich.
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <textarea class="form-control" type="text" id="message" name="message" formControlName="message" placeholder="Nachricht..." rows="4" class="form-control md-textarea"></textarea>
+                    <div *ngIf="this.contactForm.get('message')?.invalid && this.contactForm.get('message')?.errors && 
+                    (this.contactForm.get('message')?.dirty || this.contactForm.get('message')?.touched)">
+                        <small class="text-danger"
+                        *ngIf="this.contactForm.get('message')?.hasError('required')">
+                        Das Feld ist erforderlich.
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <button type="submit" (click)="sendMessage()" class="btn btn-primary send" [disabled]="!(this.contactForm.dirty && this.contactForm.valid)">Senden</button>
+                </div>
+            </div>
+        </form>
+
+        <!--Success Message-->
+        <div id="notification" *ngIf="this.sendData != null">
+            <div class="icon"></div>
+            <div class="message">
+                <p>Deine Nachricht wurde erfolgreich verschickt!</p>
+                <p>Inhalt:</p>
+                <div id="formdata">
+                    <ul>
+                        <li>Vorname: {{ this.sendData.firstname }}</li>
+                        <li>Nachname: {{ this.sendData.lastname }}</li>
+                        <li>E-Mail: {{ this.sendData.email }}</li>
+                        <li>Betreff: {{ this.sendData.subject }}</li>
+                        <li>Nachricht: {{ this.sendData.message }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

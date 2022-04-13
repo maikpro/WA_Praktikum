@@ -92,7 +92,7 @@
   }
   
   #notification {
-    display: none;
+    /*display: none;*/
     border: 5px solid green;
     padding: 20px;
     background: green;
