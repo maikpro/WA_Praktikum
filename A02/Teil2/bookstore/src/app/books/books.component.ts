@@ -23,6 +23,9 @@ export class BooksComponent implements OnInit {
 
   public currentYear: number = new Date().getFullYear();
 
+  // Bsp: 10000.99
+  private currencyCheck = /^\d{0,5}(\.\d{0,2})?$/;
+
   constructor(private formBuilder: FormBuilder) { }
 
   public ngOnInit(): void {
@@ -36,7 +39,7 @@ export class BooksComponent implements OnInit {
       year: ['', Validators.required],
       sites: ['', Validators.required],
       publisher: ['', Validators.required],
-      price: ['', Validators.required]
+      price: ['', [Validators.required, Validators.pattern(this.currencyCheck)]]
     });
   }
 
@@ -78,7 +81,7 @@ export class BooksComponent implements OnInit {
       year: [this.selectedRow.year, Validators.required],
       sites: [this.selectedRow.sites, Validators.required],
       publisher: [this.selectedRow.publisher, Validators.required],
-      price: [this.selectedRow.price, Validators.required]
+      price: [this.selectedRow.price, Validators.pattern(this.currencyCheck)]
     });
     this.openModal(Action.EDIT);
   }
