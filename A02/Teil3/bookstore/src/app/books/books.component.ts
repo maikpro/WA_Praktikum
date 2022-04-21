@@ -29,7 +29,10 @@ export class BooksComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, public booksService: BooksService) { }
 
   public ngOnInit(): void {
-    this.loadFromLocalStorage();
+    if(this.booksService.getRowData().length == 0){
+      this.loadFromLocalStorage();
+    }
+    
     //this.lastId = this.rowData[this.rowData.length-1].id;
     this.lastId = this.booksService.getLastId();
     console.log(this.lastId);
