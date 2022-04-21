@@ -1,0 +1,195 @@
+<div class="container">
+
+  <div class="action-container">
+    <div class="action-buttons">
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="openModal(action.ADD)">
+        <i class="fa-solid fa-plus"></i> Buch hinzufügen
+      </button>
+
+      <!--Clear Localstorage-->
+      <button type="button" class="btn btn-primary" (click)="clearLocalStorage()">
+        <i class="fa-solid fa-eraser"></i> Localstorage leeren
+      </button>
+    </div>
+  </div>
+  
+
+  <!--Book Table-->
+    <table id="bookTable" class="table table-hover table-dark table-striped">
+        <thead>
+          <tr>
+              <!--Autor,Titel, Erscheinungsjahr, Seiten, Verlag-->
+            <th scope="col">#</th>
+            <th scope="col">Titel</th>
+            <th scope="col">Autor</th>
+            <th scope="col">Erscheinungsjahr</th>
+            <th scope="col">Seiten</th>
+            <th scope="col">Verlag</th>
+            <th scope="col">Preis</th>
+            <th scope="col">Editieren</th>
+            <th scope="col">Löschen</th>
+          </tr>
+        </thead>
+        <tbody id="bookrows">
+          <tr *ngFor="let row of this.booksService.getRowData(); let i=index">
+            <th scope="row">{{ row.id }}</th>
+            <td>{{ row.title }}</td>
+            <td>{{ row.author }}</td>
+            <td>{{ row.year }}</td>
+            <td>{{ row.sites }}</td>
+            <td>{{ row.publisher }}</td>
+            <td>{{ row.price }}€</td>
+
+            <!--actions-->
+            <td>
+              <div class="edit" (click)="openEditModal(i)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <i class="fa-solid fa-pen"></i>
+              </div>
+            </td>
+            <td>
+              <div class="delete" (click)="openDeleteModal(i)" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                <i class="fa-solid fa-trash"></i>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+<!--LISTE-->
+
+<!--Modal-->
+<!-- ADD / EDIT Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+        <h5 *ngIf="this.currentAction === action.ADD" class="modal-title" id="exampleModalLabel">Buch hinzufügen</h5>
+        <h5 *ngIf="this.currentAction === action.EDIT" class="modal-title" id="exampleModalLabel">'{{this.selectedRow?.title}}' ändern</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        
+        <!--FORM-->
+        <form id="addRow" [formGroup]="this.rowForm">
+            <div class="modal-body">
+                <!--Titel-->
+                <label class="form-label" for="titel">Titel</label>
+                <input class="form-control" type="text" formControlName="title">
+                <div *ngIf="this.rowForm.get('sites')?.invalid && 
+                  this.rowForm.get('sites')?.errors && 
+                    (this.rowForm.get('sites')?.dirty || this.rowForm.get('sites')?.touched)">
+                  <small class="text-danger"
+                      *ngIf="this.rowForm.get('title')?.hasError('required')">
+                      Das Feld ist erforderlich.
+                  </small>
+                </div>
+
+                <!--Autor-->
+                <label class="form-label" for="autor">Autor</label>
+                <input class="form-control" type="text" formControlName="author">
+                <div *ngIf="this.rowForm.get('sites')?.invalid && 
+                  this.rowForm.get('sites')?.errors && 
+                    (this.rowForm.get('sites')?.dirty || this.rowForm.get('sites')?.touched)">
+                  <small class="text-danger"
+                      *ngIf="this.rowForm.get('author')?.hasError('required')">
+                      Das Feld ist erforderlich.
+                  </small>
+                </div>
+
+                <!--Erscheinungsjahr-->
+                <label class="form-label" for="jahr">Erscheinungsjahr</label>
+                <input class="form-control" type="number" formControlName="year" min="1900" [max]="this.currentYear">
+                <div *ngIf="this.rowForm.get('year')?.invalid && 
+                  this.rowForm.get('year')?.errors && 
+                    (this.rowForm.get('year')?.dirty || this.rowForm.get('year')?.touched)">
+                  <small class="text-danger"
+                      *ngIf="this.rowForm.get('year')?.hasError('required')">
+                      Das Feld ist erforderlich.
+                  </small>
+                  <small class="text-danger"
+                      *ngIf="this.rowForm.get('year')?.hasError('min')">
+                      Es muss mindestens das Jahr 1900 angegeben werden.
+                  </small>
+                  <small class="text-danger"
+                      *ngIf="this.rowForm.get('year')?.hasError('max')">
+                      Es kann maximal das Jahr 2022 angegeben werden.
+                  </small>
+                </div>
+
+                <!--Seiten-->
+                <label class="form-label" for="seiten">Seiten</label>
+                <input class="form-control" type="number" formControlName="sites" min="1" max="3000">
+                <div *ngIf="this.rowForm.get('sites')?.invalid && 
+                  this.rowForm.get('sites')?.errors && 
+                    (this.rowForm.get('sites')?.dirty || this.rowForm.get('sites')?.touched)">
+                  <small class="text-danger"
+                      *ngIf="this.rowForm.get('sites')?.hasError('required')">
+                      Das Feld ist erforderlich.
+                  </small>
+                  <small class="text-danger"
+                      *ngIf="this.rowForm.get('sites')?.hasError('min')">
+                      Es muss mindestens 1 Seite angegeben werden.
+                  </small>
+                  <small class="text-danger"
+                      *ngIf="this.rowForm.get('sites')?.hasError('max')">
+                      Es können maximal 3000 Seiten angegeben werden.
+                  </small>
+                </div>
+
+                <!--Verlag-->
+                <label class="form-label" for="verlag">Verlag</label>
+                <input class="form-control" type="text" formControlName="publisher">
+                <div *ngIf="this.rowForm.get('sites')?.invalid && 
+                  this.rowForm.get('sites')?.errors && 
+                    (this.rowForm.get('sites')?.dirty || this.rowForm.get('sites')?.touched)">
+                  <small class="text-danger"
+                      *ngIf="this.rowForm.get('publisher')?.hasError('required')">
+                      Das Feld ist erforderlich.
+                  </small>
+                </div>
+
+                <!--Preis-->
+                <label class="form-label" for="preis">Preis</label>
+                <input class="form-control" type="text" formControlName="price">
+                <div *ngIf="this.rowForm.get('sites')?.invalid && 
+                  this.rowForm.get('sites')?.errors && 
+                    (this.rowForm.get('sites')?.dirty || this.rowForm.get('sites')?.touched)">
+                  <small class="text-danger"
+                      *ngIf="this.rowForm.get('price')?.hasError('required')">
+                      Das Feld ist erforderlich.
+                  </small>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button data-bs-dismiss="modal" *ngIf="this.currentAction === action.ADD" class="btn btn-primary" (click)="addRow()" [disabled]="!(this.rowForm.dirty && this.rowForm.valid)">Hinzufügen</button>
+                <button data-bs-dismiss="modal" *ngIf="this.currentAction === action.EDIT" class="btn btn-primary" (click)="editRow()" [disabled]="!(this.rowForm.dirty && this.rowForm.valid)">Ändern</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
+            </div>
+        </form>
+      </div>
+    </div>
+</div>
+
+<!--DELETE MODAL-->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">'{{this.selectedRow?.title}}' löschen</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Wollen Sie das Buch '{{this.selectedRow?.title}}' wirklich löschen?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="deleteRow()">Löschen</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="output"></div>
