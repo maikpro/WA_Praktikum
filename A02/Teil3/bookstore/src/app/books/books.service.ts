@@ -21,10 +21,14 @@ export class BooksService {
   }
 
   public update(editedRow: any): void {
+    // Durchläuft das Array und ändert nur die Row mit den abgeänderten Daten
+    // neues Array mit Änderung wird zurückgegeben
     this.rowData = this.rowData.map(row => row.id !== editedRow.id ? row : editedRow);
   }
 
   public delete(selectedRow: any): void {
+    // Durchläuft das Array und löscht nur die Row mit der gewählten ID
+    // neues Array ohne die gelöschte Row wird zurückgegeben
     this.rowData = this.rowData.filter(row => row.id !== selectedRow.id);
   }
 
