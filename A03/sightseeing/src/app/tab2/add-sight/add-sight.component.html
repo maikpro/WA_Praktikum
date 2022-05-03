@@ -10,5 +10,25 @@
 </ion-header>
 
 <ion-content>
+  
   <ion-button (click)="this.save()">TEST SAVE!</ion-button>
+  
+  <!--Camera Symbol-->
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+    <ion-fab-button (click)="this.selectImage()">
+      <ion-icon name="camera"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <!--Form zum Hinzufügen eines neuen Sights-->
+  <form [formGroup]="this.sightForm">
+    <!--Name-->
+    <label class="form-label" for="name">Name</label>
+    <input type="text" formControlName="name">
+  </form>
+
+  <div *ngIf="this.displayImage() !== undefined" class="selectedImage">
+    <img src="{{ this.displayImage() }}">
+  </div>
+  
 </ion-content>
