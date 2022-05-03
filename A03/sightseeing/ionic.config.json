@@ -1,0 +1,7 @@
+{
+  "name": "Sightseeing",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
