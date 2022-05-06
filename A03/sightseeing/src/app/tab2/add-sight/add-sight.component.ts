@@ -21,7 +21,9 @@ export class AddSightComponent implements OnInit {
 
   public ngOnInit() {
     this.sightForm = this.formBuilder.group({
-      name: ['', Validators.required],
+      name: ['name', Validators.required],
+      description: ['description', Validators.required],
+      ranking: [3, Validators.required]
     });
   }
 
@@ -34,7 +36,7 @@ export class AddSightComponent implements OnInit {
       quality: 100,
       allowEditing: false,
       resultType: CameraResultType.Base64,
-      source: CameraSource.Photos // TODO: Hier auf Camera wechseln!
+      source: CameraSource.Camera // TODO: Hier auf Camera wechseln!
     });
 
     console.log(this.photo);
@@ -42,40 +44,72 @@ export class AddSightComponent implements OnInit {
   }
 
   public displayImage(): string {
-    if(this.photo){
-      return 'data:image/jpeg;base64,' + this.photo.base64String;
+    // Placeholder
+    if(!this.photo){
+      return "https://clap-club.de/wp-content/themes/15zine/library/images/placeholders/placeholder-360x240@2x.png";
+    }
+
+    // Vorschaubild
+    return 'data:image/jpeg;base64,' + this.photo.base64String;
+  }
+
+  public async save() {
+    
+
+    /*const testSight = {
+      name: 'sightFromModal',
+      description: 'descriptionFromModal',
+      ranking: 11,
+      gpsPosition
+    };*/
+
+    /* get form values */
+    if(this.sightForm.valid){
+      // save the selected photo
+      if(this.photo){
+        const fileName = await this.saveImage();
+        console.log(fileName);
+        this.saveNewSight(fileName);
+      }
+
+      // ohne Foto speichern
+      else{
+        this.saveNewSight();
+      }
     }
   }
 
-  public save(): void {
+  private saveNewSight(fileName?){
+    // get Current GPS from Sensor!
     const gpsPosition: GpsPostion = {
       lat: "666",
       lng: "777"
     };
 
-    const testSight = {
-      name: 'sightFromModal',
-      description: 'descriptionFromModal',
-      ranking: 11,
-      gpsPosition
-    };
+    // get form values
+    console.log(this.sightForm.value);
 
-    if(this.photo){
-      this.saveImage();
+    const newSight = this.sightForm.value;
+    //add gpsPosition to data
+    newSight.gpsPosition = gpsPosition;
+
+    if(fileName){
+      // add photo if available
+      newSight.fileName = fileName;
     }
 
-    this.modalController.dismiss(testSight);
-
+    this.modalController.dismiss(this.sightForm.value);
   }
 
   private async saveImage(){
     const fileName = 'sightseeing_' + new Date().getTime() + '.jpeg';
     const savedFile = await Filesystem.writeFile({
       directory: Directory.Data, // Saves in data Application folder => when app uninstalled photos deleted!
-      path: `images/${fileName}`,
+      path: `/images/${fileName}`,
       data: this.photo.base64String
     });
 
     console.log("saved File: ", savedFile);
+    return fileName;
   }
 }

@@ -9,26 +9,61 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [fullscreen]="true">
+  <!--Photo Preview-->
+  <ion-row class="ion-justify-content-center">
+    <ion-col size="7" class="flex ion-justify-content-center">
+      <div class="selectedImage text-center" (click)="this.selectImage()" horizontal="center">
+        <img src="{{ this.displayImage() }}">
+        <p>Foto hinzufügen</p>
+      </div>
+    </ion-col>
+  </ion-row>
+
+  <!--Sightseeing Details-->
+  <ion-row class="ion-justify-content-center">
+    <ion-col size="7">
+      <!--Form zum Hinzufügen eines neuen Sights-->
+      <form [formGroup]="this.sightForm">
+        <!--Name-->
+        <div class="input-container">
+          <ion-label for="name">Name</ion-label>
+          <ion-input type="text" formControlName="name"></ion-input>
+        </div>
+        
+        <!--desciption-->
+        <div class="input-container">
+          <ion-label for="description">Beschreibung</ion-label>
+          <ion-input type="text" formControlName="description"></ion-input>
+        </div>
+        
+        <!--ranking-->
+        <div class="input-container">
+          <ion-label for="ranking">Bewertung</ion-label>
+          <ion-range min="1" max="5" step="1" snaps="true" formControlName="ranking">
+            <ion-icon size="small" slot="start" name="sad"></ion-icon>
+            <ion-icon slot="end" name="happy"></ion-icon>
+          </ion-range>
+        </div>
+        
+      </form>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="ion-justify-content-center">
+    <ion-col size="7" class="text-center">
+      <!-- save new sight!-->
+      <ion-button (click)="this.save()">Speichern</ion-button>
+    </ion-col>
+  </ion-row>
   
-  <ion-button (click)="this.save()">TEST SAVE!</ion-button>
-  
+
   <!--Camera Symbol-->
-  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+  <!--<ion-fab vertical="bottom" horizontal="center" slot="fixed">
     <ion-fab-button (click)="this.selectImage()">
       <ion-icon name="camera"></ion-icon>
     </ion-fab-button>
-  </ion-fab>
+  </ion-fab>-->
 
-  <!--Form zum Hinzufügen eines neuen Sights-->
-  <form [formGroup]="this.sightForm">
-    <!--Name-->
-    <label class="form-label" for="name">Name</label>
-    <input type="text" formControlName="name">
-  </form>
 
-  <div *ngIf="this.displayImage() !== undefined" class="selectedImage">
-    <img src="{{ this.displayImage() }}">
-  </div>
-  
 </ion-content>

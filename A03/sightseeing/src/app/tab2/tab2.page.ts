@@ -1,7 +1,12 @@
-import { Component } from '@angular/core';
+/* eslint-disable @typescript-eslint/member-ordering */
+/* eslint-disable @typescript-eslint/quotes */
+/* eslint-disable no-trailing-spaces */
+import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { Sight } from '../models/sight';
 import { SightService } from '../services/sight.service';
 import { AddSightComponent } from './add-sight/add-sight.component';
+import { PreviewSightComponent } from './preview-sight/preview-sight.component';
 
 @Component({
   selector: 'app-tab2',
@@ -12,7 +17,7 @@ export class Tab2Page {
 
   constructor(public sightService: SightService, private modalController: ModalController) {}
 
-  public async showModal(): Promise<void> {
+  public async showModalForAdd(): Promise<void> {
     const modal = await this.modalController.create({
       component: AddSightComponent
     });
@@ -23,11 +28,20 @@ export class Tab2Page {
         const newSight = data.data;
         if(newSight !== undefined){
           console.log(newSight);
-          // TODO: Speichere Sight in Array ab!
           this.sightService.saveSight(newSight);
         }
     });
 
     return await modal.present(); // öffnet das Modal AddSightComponent
+  }
+
+  public async showModalForPreview(sight: Sight): Promise<void> {
+    const modal = await this.modalController.create({
+      component: PreviewSightComponent,
+      componentProps: {
+        sight
+      } // sendet Daten mit ins modal
+    });
+    return await modal.present();
   }
 }

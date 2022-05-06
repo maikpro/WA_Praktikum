@@ -1,0 +1,19 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title slot="start">
+      Sehenswürdigkeit Vorschau
+    </ion-title>
+    <ion-button slot="end" (click)="this.closeModal()">
+      <ion-icon name="close"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="preview-sight-image">
+    <img [src]="this.sight.fileName" alt="preview">
+  </div>
+</ion-content>
+
+
+

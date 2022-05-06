@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/quotes */
 /* eslint-disable no-trailing-spaces */
 import { Injectable } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Directory, Filesystem } from '@capacitor/filesystem';
 import { GpsPostion } from '../models/gps-position';
 import { Sight } from '../models/sight';
 
@@ -9,7 +11,7 @@ import { Sight } from '../models/sight';
 })
 export class SightService {
   private sights: Sight[];
-  constructor() { 
+  constructor(private domSantizer: DomSanitizer) { 
     this.sights = [];
     this.createStaticTestData();
   }
@@ -18,14 +20,40 @@ export class SightService {
     return this.sights;
   }
 
-  public saveSight(sight: Sight){
+  public async saveSight(sight: Sight){
     console.log('saves sight to array!', sight);
     if(sight == null){
       console.log('sight is null!');
       return;
     }
+
+    if(sight.fileName){
+      // speichere das Bild ab
+      sight = await this.loadImage(sight);
+    }
+    
     this.sights.push(sight);
     this.persist();
+  }
+
+  private async loadImage(sight: Sight) {
+    console.log("displaySightImage: ", sight.fileName);
+    
+    if(!sight.fileName){
+      return;
+    }
+    
+    const readFile = await Filesystem.readFile({
+      directory: Directory.Data,
+      path: `/images/${sight.fileName}`//"/images/" + sight.imageFile
+    });
+
+    console.log("=>>> ", readFile);
+    //return 'data:image/jpeg;base64,' + readFile;
+
+    //sanitize url to be safe with DomSanitizer
+    sight.fileName = this.domSantizer.bypassSecurityTrustResourceUrl('data:image/jpeg;base64,' + readFile.data);
+    return sight;
   }
 
   private persist(): void {

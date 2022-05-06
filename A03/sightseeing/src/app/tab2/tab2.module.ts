@@ -8,6 +8,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 
 import { Tab2PageRoutingModule } from './tab2-routing.module';
 import { AddSightComponent } from './add-sight/add-sight.component';
+import { PreviewSightComponent } from './preview-sight/preview-sight.component';
 
 @NgModule({
   imports: [
@@ -18,6 +19,6 @@ import { AddSightComponent } from './add-sight/add-sight.component';
     ExploreContainerComponentModule,
     Tab2PageRoutingModule,
   ],
-  declarations: [Tab2Page, AddSightComponent]
+  declarations: [Tab2Page, AddSightComponent, PreviewSightComponent]
 })
 export class Tab2PageModule {}
