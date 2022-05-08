@@ -1,4 +1,4 @@
 export interface GpsPostion{
-    lat: string;
-    lng: string;
+    lat: number;
+    lng: number;
 }

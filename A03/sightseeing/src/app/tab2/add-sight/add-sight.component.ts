@@ -6,6 +6,7 @@ import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera
 import { Directory, Filesystem } from '@capacitor/filesystem';
 import { ModalController } from '@ionic/angular';
 import { GpsPostion } from 'src/app/models/gps-position';
+import { GPSService } from 'src/app/services/gps.service';
 
 @Component({
   selector: 'app-add-sight',
@@ -17,7 +18,7 @@ export class AddSightComponent implements OnInit {
 
   public photo: Photo;
 
-  constructor(private modalController: ModalController, private formBuilder: FormBuilder) { }
+  constructor(private modalController: ModalController, private formBuilder: FormBuilder, public gpsService: GPSService) { }
 
   public ngOnInit() {
     this.sightForm = this.formBuilder.group({
@@ -54,14 +55,6 @@ export class AddSightComponent implements OnInit {
   }
 
   public async save() {
-    
-
-    /*const testSight = {
-      name: 'sightFromModal',
-      description: 'descriptionFromModal',
-      ranking: 11,
-      gpsPosition
-    };*/
 
     /* get form values */
     if(this.sightForm.valid){
@@ -79,11 +72,13 @@ export class AddSightComponent implements OnInit {
     }
   }
 
-  private saveNewSight(fileName?){
+
+  private async saveNewSight(fileName?){
     // get Current GPS from Sensor!
+    await this.gpsService.setGPSPosition();
     const gpsPosition: GpsPostion = {
-      lat: "666",
-      lng: "777"
+      lat: this.gpsService.coords.latitude,
+      lng: this.gpsService.coords.longitude
     };
 
     // get form values
@@ -96,6 +91,7 @@ export class AddSightComponent implements OnInit {
     if(fileName){
       // add photo if available
       newSight.fileName = fileName;
+      //newSight.fileName = this.photo.base64String;
     }
 
     this.modalController.dismiss(this.sightForm.value);
@@ -106,7 +102,8 @@ export class AddSightComponent implements OnInit {
     const savedFile = await Filesystem.writeFile({
       directory: Directory.Data, // Saves in data Application folder => when app uninstalled photos deleted!
       path: `/images/${fileName}`,
-      data: this.photo.base64String
+      data: this.photo.base64String,
+      recursive: true //erstellt alle Ordner die auf diesem Pfad liegen!
     });
 
     console.log("saved File: ", savedFile);

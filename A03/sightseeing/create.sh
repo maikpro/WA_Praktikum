@@ -1,13 +1,16 @@
 # android ordner löschen:
-rm -r android
+#rm -r android
 
 # www Ordner erstellen:
-ionic build
+#ionic build
 
 # add android Platform
-npx cap add android
+#npx cap add android
 
-npx cap sync android
+#npx cap sync android
 
 # in android studio öffnen:
-npx cap open android
+#npx cap open android
+
+# oder
+ionic capacitor build android

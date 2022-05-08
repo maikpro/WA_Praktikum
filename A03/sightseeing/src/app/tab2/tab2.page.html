@@ -24,7 +24,7 @@
   <ion-item *ngFor="let sight of this.sightService.getSights()" (click)="showModalForPreview(sight)">
     <ion-avatar slot="start">
       <img *ngIf="sight.fileName === undefined" src="https://clap-club.de/wp-content/themes/15zine/library/images/placeholders/placeholder-360x240@2x.png" alt="default">
-      <img *ngIf="sight.fileName !== undefined" [src]="sight.fileName">
+      <img *ngIf="sight.fileName !== undefined" [src]="sight.fileUrl">
     </ion-avatar>
     <ion-label>{{ sight.name }}</ion-label>
     <ion-label>{{ sight.description }}</ion-label>
@@ -39,4 +39,6 @@
   </ion-fab-button>
 </ion-fab>
   
+<h1 *ngIf="this.gpsService.coords">lat: {{ this.gpsService.coords.latitude }} | lng: {{ this.gpsService.coords.longitude }}</h1>
+<ion-button (click)="this.showPosition()">GPS TEST!</ion-button>
 </ion-content>

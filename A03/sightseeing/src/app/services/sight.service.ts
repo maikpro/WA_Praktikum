@@ -5,6 +5,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Directory, Filesystem } from '@capacitor/filesystem';
 import { GpsPostion } from '../models/gps-position';
 import { Sight } from '../models/sight';
+import { GPSService } from './gps.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,13 @@ export class SightService {
   private sights: Sight[];
   constructor(private domSantizer: DomSanitizer) { 
     this.sights = [];
-    this.createStaticTestData();
+    this.loadFromLocalStorage();
+
+    /*if(this.sights.length === 0){
+      this.createStaticTestData();
+    }*/
+
+    
   }
 
   public getSights(): Sight[] {
@@ -36,10 +43,11 @@ export class SightService {
     this.persist();
   }
 
-  private async loadImage(sight: Sight) {
+  public async loadImage(sight: Sight) {
     console.log("displaySightImage: ", sight.fileName);
     
     if(!sight.fileName){
+      console.log("leer");
       return;
     }
     
@@ -52,8 +60,9 @@ export class SightService {
     //return 'data:image/jpeg;base64,' + readFile;
 
     //sanitize url to be safe with DomSanitizer
-    sight.fileName = this.domSantizer.bypassSecurityTrustResourceUrl('data:image/jpeg;base64,' + readFile.data);
+    sight.fileUrl = this.domSantizer.bypassSecurityTrustResourceUrl('data:image/jpeg;base64,' + readFile.data);
     return sight;
+    //return this.domSantizer.bypassSecurityTrustResourceUrl('data:image/jpeg;base64,' + readFile.data);
   }
 
   private persist(): void {
@@ -63,8 +72,8 @@ export class SightService {
 
   private createStaticTestData(): void {
     const gpsPosition: GpsPostion = {
-      lat: '123',
-      lng: '456'
+      lat: 123,
+      lng: 456
     };
 
     const sight1: Sight = {
@@ -89,5 +98,17 @@ export class SightService {
     this.saveSight(sight1);
     this.saveSight(sight2);
     this.saveSight(sight3);
+  }
+
+  private loadFromLocalStorage(){
+    const dataFromLocalStorage = JSON.parse(localStorage.getItem("sights"));
+    if(dataFromLocalStorage){
+      dataFromLocalStorage.forEach(sight => {
+        this.saveSight(sight);
+      });
+    } else {
+      this.createStaticTestData();
+    }
+    
   }
 }

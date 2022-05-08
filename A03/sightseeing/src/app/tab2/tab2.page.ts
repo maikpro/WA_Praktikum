@@ -4,6 +4,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Sight } from '../models/sight';
+import { GPSService } from '../services/gps.service';
 import { SightService } from '../services/sight.service';
 import { AddSightComponent } from './add-sight/add-sight.component';
 import { PreviewSightComponent } from './preview-sight/preview-sight.component';
@@ -15,7 +16,7 @@ import { PreviewSightComponent } from './preview-sight/preview-sight.component';
 })
 export class Tab2Page {
 
-  constructor(public sightService: SightService, private modalController: ModalController) {}
+  constructor(public sightService: SightService, private modalController: ModalController, public gpsService: GPSService) {}
 
   public async showModalForAdd(): Promise<void> {
     const modal = await this.modalController.create({
@@ -43,5 +44,10 @@ export class Tab2Page {
       } // sendet Daten mit ins modal
     });
     return await modal.present();
+  }
+
+  public showPosition(): void {
+    console.log("clicked!");
+    this.gpsService.setGPSPosition();
   }
 }

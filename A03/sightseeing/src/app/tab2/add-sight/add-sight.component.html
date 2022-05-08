@@ -14,7 +14,7 @@
   <ion-row class="ion-justify-content-center">
     <ion-col size="7" class="flex ion-justify-content-center">
       <div class="selectedImage text-center" (click)="this.selectImage()" horizontal="center">
-        <img src="{{ this.displayImage() }}">
+        <img [src]="this.displayImage()">
         <p>Foto hinzufügen</p>
       </div>
     </ion-col>
