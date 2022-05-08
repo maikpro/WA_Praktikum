@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/quotes */
 /* eslint-disable @typescript-eslint/member-ordering */
 import { Injectable } from '@angular/core';
-import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
+import { Geolocation } from '@capacitor/geolocation';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +10,9 @@ import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 export class GPSService {
   public coords: GeolocationCoordinates;
 
-  constructor(private geolocation: Geolocation) { }
+  constructor() { }
   public async setGPSPosition() {
-    await this.geolocation.getCurrentPosition().then((response) => {
+    /*await this.geolocation.getCurrentPosition().then((response) => {
       console.log(response);
       const geolocationPosition: GeolocationPosition  = response;
       this.coords = geolocationPosition.coords;
@@ -20,8 +20,13 @@ export class GPSService {
       
      }).catch((error) => {
        console.log('Error getting location', error);
-     });
+     });*/
+
+     this.coords = await (await Geolocation.getCurrentPosition()).coords;
+     console.log(this.coords);
   }
+
+  
 
 
 }

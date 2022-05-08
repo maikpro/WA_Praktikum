@@ -72,8 +72,8 @@ export class SightService {
 
   private createStaticTestData(): void {
     const gpsPosition: GpsPostion = {
-      lat: 123,
-      lng: 456
+      lat: 52.2751897,
+      lng: 8.0393919
     };
 
     const sight1: Sight = {
