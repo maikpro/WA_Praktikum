@@ -53,7 +53,7 @@
   <ion-row class="ion-justify-content-center">
     <ion-col size="7" class="text-center">
       <!-- save new sight!-->
-      <ion-button (click)="this.save()">Speichern</ion-button>
+      <ion-button (click)="this.save()" [disabled]="!(this.sightForm.dirty && this.sightForm.valid)">Speichern</ion-button>
     </ion-col>
   </ion-row>
   

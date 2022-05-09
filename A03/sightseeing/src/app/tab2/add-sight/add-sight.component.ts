@@ -22,8 +22,8 @@ export class AddSightComponent implements OnInit {
 
   public ngOnInit() {
     this.sightForm = this.formBuilder.group({
-      name: ['name', Validators.required],
-      description: ['description', Validators.required],
+      name: ['', Validators.required],
+      description: ['', Validators.required],
       ranking: [3, Validators.required]
     });
   }

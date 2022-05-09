@@ -17,20 +17,15 @@
 <ion-list>
   <ion-list-header>
     <ion-label>Sehenswürdigkeit</ion-label>
-    <ion-label>Beschreibung</ion-label>
-    <ion-label>Bewertung</ion-label>
-    <ion-label>GPS-Koordinaten</ion-label>
   </ion-list-header>
   <!--Ab hier sights-->
   <ion-item *ngFor="let sight of this.sightService.getSights()" (click)="showModalForPreview(sight)">
     <ion-avatar slot="start">
-      <img *ngIf="sight.fileName === undefined" src="https://clap-club.de/wp-content/themes/15zine/library/images/placeholders/placeholder-360x240@2x.png" alt="default">
-      <img *ngIf="sight.fileName !== undefined" [src]="sight.fileUrl">
+      <img *ngIf="sight.fileUrl === undefined" src="https://clap-club.de/wp-content/themes/15zine/library/images/placeholders/placeholder-360x240@2x.png" alt="default">
+      <img *ngIf="sight.fileUrl !== undefined" [src]="sight.fileUrl">
     </ion-avatar>
     <ion-label>{{ sight.name }}</ion-label>
-    <ion-label>{{ sight.description }}</ion-label>
-    <ion-label>{{ sight.ranking }}</ion-label>
-    <ion-label>{{ sight.gpsPosition.lat }} | {{ sight.gpsPosition.lng }}</ion-label>
+    
   </ion-item>
 </ion-list>
 
