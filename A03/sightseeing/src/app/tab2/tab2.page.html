@@ -19,6 +19,7 @@
     <ion-label>Sehenswürdigkeit</ion-label>
     <ion-label>Beschreibung</ion-label>
     <ion-label>Bewertung</ion-label>
+    <ion-label>GPS-Koordinaten</ion-label>
   </ion-list-header>
   <!--Ab hier sights-->
   <ion-item *ngFor="let sight of this.sightService.getSights()" (click)="showModalForPreview(sight)">
@@ -29,6 +30,7 @@
     <ion-label>{{ sight.name }}</ion-label>
     <ion-label>{{ sight.description }}</ion-label>
     <ion-label>{{ sight.ranking }}</ion-label>
+    <ion-label>{{ sight.gpsPosition.lat }} | {{ sight.gpsPosition.lng }}</ion-label>
   </ion-item>
 </ion-list>
 
@@ -39,6 +41,6 @@
   </ion-fab-button>
 </ion-fab>
   
-<h1 *ngIf="this.gpsService.coords">lat: {{ this.gpsService.coords.latitude }} | lng: {{ this.gpsService.coords.longitude }}</h1>
+<!--<h1 *ngIf="this.gpsService.coords">lat: {{ this.gpsService.coords.latitude }} | lng: {{ this.gpsService.coords.longitude }}</h1>
 <ion-button (click)="this.showPosition()">GPS TEST!</ion-button>
-</ion-content>
+</ion-content>-->

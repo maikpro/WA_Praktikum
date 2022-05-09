@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 /* eslint-disable @typescript-eslint/quotes */
 /* eslint-disable no-trailing-spaces */
 import { Injectable } from '@angular/core';
@@ -13,7 +14,6 @@ import { GPSService } from './gps.service';
 export class SightService {
   private sights: Sight[];
   constructor(private domSantizer: DomSanitizer) { 
-    this.sights = [];
     this.loadFromLocalStorage();
 
     /*if(this.sights.length === 0){
@@ -48,7 +48,12 @@ export class SightService {
     
     if(!sight.fileName){
       console.log("leer");
-      return;
+      return sight;
+    }
+
+    // Bei statischen Sehenswürdigkeiten ist fileUrl bereits gesetzt!
+    if(sight.fileUrl){
+      return sight;
     }
     
     const readFile = await Filesystem.readFile({
@@ -70,6 +75,12 @@ export class SightService {
     localStorage.setItem('sights', JSON.stringify(this.sights));
   }
 
+  public clearLocalStorage(): void {
+    console.log("Clear Localstorage!");
+    localStorage.clear();
+    this.loadFromLocalStorage();
+  }
+
   private createStaticTestData(): void {
     const gpsPosition: GpsPostion = {
       lat: 52.2751897,
@@ -77,22 +88,37 @@ export class SightService {
     };
 
     const sight1: Sight = {
-      name: 'sight1',
-      description: 'description1',
+      fileName: 'static_marktplatz',
+      fileUrl: 'https://www.osnabrueck.de/fileadmin/_processed_/1/7/csm_Marktplatz__c__Christoph_Mischke_2df2100a03.jpg',
+      name: 'Osnabrücker Marktplatz',
+      description: 'Der Osnabrücker Marktplatz',
       ranking: 5,
-      gpsPosition
+      gpsPosition: {
+        lat: 52.27528,
+        lng: 8.05079
+      }
     };
     const sight2: Sight = {
-      name: 'sight2',
-      description: 'description2',
+      fileName: 'static_schloss',
+      fileUrl: 'https://www.osnabrueck.de/fileadmin/_processed_/c/9/csm_Schloss__c__Christoph_Mischke_50b0ec5565.jpg',
+      name: 'Osnabrücker Schloss',
+      description: 'Das Osnabrücker Schloss',
       ranking: 4,
-      gpsPosition
+      gpsPosition: {
+        lat: 52.2713446,
+        lng: 8.0420381
+      }
     };
     const sight3: Sight = {
-      name: 'sight3',
-      description: 'description3',
+      fileName: 'static_hegerTor',
+      fileUrl: 'https://upload.wikimedia.org/wikipedia/commons/0/0f/OSHegerTor.JPG',
+      name: 'Waterloo-Tor',
+      description: 'Das Heger Tor in Osnabrück',
       ranking: 3,
-      gpsPosition
+      gpsPosition: {
+        lat: 52.2762558,
+        lng: 8.0388252
+      }
     };
 
     this.saveSight(sight1);
@@ -101,6 +127,7 @@ export class SightService {
   }
 
   private loadFromLocalStorage(){
+    this.sights = [];
     const dataFromLocalStorage = JSON.parse(localStorage.getItem("sights"));
     if(dataFromLocalStorage){
       dataFromLocalStorage.forEach(sight => {

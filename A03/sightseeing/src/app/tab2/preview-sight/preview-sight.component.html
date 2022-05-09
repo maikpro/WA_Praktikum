@@ -11,7 +11,8 @@
 
 <ion-content [fullscreen]="true">
   <div class="preview-sight-image">
-    <img [src]="this.sight.fileUrl" alt="preview">
+    <img *ngIf="this.sight.fileUrl" [src]="this.sight.fileUrl" alt="preview">
+    <img *ngIf="!this.sight.fileUrl" src="https://clap-club.de/wp-content/themes/15zine/library/images/placeholders/placeholder-360x240@2x.png" alt="preview">
   </div>
 </ion-content>
 

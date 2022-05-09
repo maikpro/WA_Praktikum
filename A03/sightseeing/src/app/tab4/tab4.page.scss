@@ -1,5 +1,9 @@
+html, body, ion-content, capacitor-google-map {
+  background-color: transparent;
+}
+
 capacitor-google-map {
     display: inline-block;
     width: 100%;
-    height: 100%;
-  }
+    height: 99.2%;
+}

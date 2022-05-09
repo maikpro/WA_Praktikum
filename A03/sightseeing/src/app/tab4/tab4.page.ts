@@ -29,8 +29,8 @@ export class Tab4Page {
       apiKey: 'AIzaSyDGUwDlE0mSkU6FnAwGtGmY0SuCxq6ib44',
       config: {
         center: {
-          lat: 52.2779659,
-          lng: 7.98539,
+          lat: 52.27528,
+          lng: 8.05079,
         },
         zoom: 14,
       },

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SightService } from '../services/sight.service';
 
 @Component({
   selector: 'app-tab3',
@@ -7,6 +8,5 @@ import { Component } from '@angular/core';
 })
 export class Tab3Page {
 
-  constructor() {}
-
+  constructor(public sightService: SightService) {}
 }
