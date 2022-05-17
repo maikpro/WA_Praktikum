@@ -9,3 +9,8 @@
 form {
     width: 350px;
 }
+
+.edit:hover i {
+    color: orange;
+    cursor: pointer;
+}
