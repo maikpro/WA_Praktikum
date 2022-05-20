@@ -47,7 +47,19 @@
     <div class="container mt-2">
         <?php
 
+        include './model/person.php';
+
+        $rows = array();
         $tableRowId = 0;
+
+        function get_array_test()
+        {
+            global $rows;
+            //var_dump($rows);
+            foreach ($rows as $key => $person) {
+                echo '<p>' . $person . '</p>';
+            }
+        }
 
         function get_last_id($csv_path)
         {
@@ -59,6 +71,8 @@
         function read_csv_and_create_table($csv_path)
         {
             global $tableRowId;
+            global $rows;
+
             $html = '<table class="table table-hover table-striped light-violet">';
             $file = fopen($csv_path, 'r'); //read only
 
@@ -84,9 +98,18 @@
                     $html .= '<td>' . $value . '</td>';
                 }
 
+                //Erstelle neue Person aus CSV Daten
+                $person = new Person($row[0], $row[1], $row[2], $row[3], $row[4], $row[5]);
+                array_push($rows, $person);
+
                 // bearbeiten icon
                 // TODO über form.php lösen, dass die daten dort eingeladen werden
-                $html .= '<td><div class="edit" id="' . $tableRowId . '" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-pen"></i></div></td>';
+                //$html .= '<td><div class="edit" id="' . $tableRowId . '" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-pen"></i></div></td>';
+                $html .= '<td>';
+                $html .= '<a href="index.php?edit=' . $tableRowId . '">';
+                $html .= '<div class="edit"><i class="fa-solid fa-pen"></i></div>';
+                $html .= '</a>';
+                $html .= '</td>';
 
                 $tableRowId++;
                 $html .= '</tr>';
@@ -126,6 +149,19 @@
                 fclose($file);
             }
         }
+
+        function edit_row()
+        {
+            global $rows;
+
+            if (isset($_GET["edit"])) {
+                $id = $_GET["edit"];
+
+                $person = $rows[$id];
+                echo '<h1>' . $person . '</h1>';
+                //var_dump($rows[$id]);
+            }
+        }
         ?>
 
         <div class="form-data">
@@ -133,13 +169,17 @@
 
             // funktion aufrufen
             add_row_to_csv('csv.csv');
-
             ?>
         </div>
 
         <div class="table-csv">
             <?php
             echo read_csv_and_create_table('csv.csv');
+
+            edit_row();
+
+            //test
+            //get_array_test();
             ?>
         </div>
 
@@ -161,7 +201,7 @@
                         <form action="./index.php" method="post">
                             <!--Vorname-->
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" name="vorname" placeholder="Vorname" required>
+                                <input type="text" class="form-control" name="vorname" placeholder="Vorname" value="<?php echo 'hello'; ?>" required>
                             </div>
 
                             <!--Nachname-->
@@ -197,8 +237,11 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="./js/getRow.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script src="./js/modal.js"></script>
 </body>
 
 </html>
