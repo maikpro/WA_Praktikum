@@ -14,7 +14,7 @@
         <div class="container-fluid">
             <a class="navbar-brand" href="./index.html">
                 <div class="logo">
-                    <i class="fa-solid fa-book"></i> PHP
+                    <i class="fa-brands fa-php"></i>
                 </div>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">

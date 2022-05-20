@@ -1,3 +1,7 @@
+.logo i {
+    font-size: 50px;
+}
+
 .violet {
     background-color: #4F5B93;
 }
@@ -12,5 +16,10 @@ form {
 
 .edit:hover i {
     color: orange;
+    cursor: pointer;
+}
+
+.delete:hover i {
+    color: #f03;
     cursor: pointer;
 }

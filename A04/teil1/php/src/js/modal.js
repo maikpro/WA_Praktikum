@@ -3,9 +3,13 @@ $( document ).ready(function() {
 
     const path = location.href;
     if(path.includes("?edit=")){
-        console.log("öffne modal");
+        console.log("öffne edit modal");
         $('#exampleModal').modal("show");
     }
-    
+
+    else if(path.includes("?delete=")){
+        console.log("öffne delete modal");
+        $('#deleteModal').modal("show");
+    }
 });
 

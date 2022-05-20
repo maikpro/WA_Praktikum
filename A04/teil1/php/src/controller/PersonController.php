@@ -55,6 +55,7 @@ class PersonController
         $html .= '<th scope="col">' . $header->get_plz() . '</th>';
         $html .= '<th scope="col">' . $header->get_ort() . '</th>';
         $html .= '<th scope="col">edit</th>';
+        $html .= '<th scope="col">delete</th>';
         $html .= '</thead>';
 
         // create table rows
@@ -62,28 +63,32 @@ class PersonController
 
         foreach ($this->personArray as $key => $person) {
             // header überspringen
-            if ($key == 0) {
-                continue;
+            if ($key > 0) {
+                $html .= '<tr>';
+
+                $html .= '<td>' . $person->get_id() . '</td>';
+                $html .= '<td>' . $person->get_vorname() . '</td>';
+                $html .= '<td>' . $person->get_nachname() . '</td>';
+                $html .= '<td>' . $person->get_strasse() . '</td>';
+                $html .= '<td>' . $person->get_plz() . '</td>';
+                $html .= '<td>' . $person->get_ort() . '</td>';
+
+                // bearbeiten icon
+                $html .= '<td>';
+                $html .= '<a href="index.php?edit=' . $key . '">';
+                $html .= '<div class="edit"><i class="fa-solid fa-pen"></i></div>';
+                $html .= '</a>';
+                $html .= '</td>';
+
+                // löschen icon
+                $html .= '<td>';
+                $html .= '<a href="index.php?delete=' . $key . '">';
+                $html .= '<div class="delete"><i class="fa-solid fa-trash"></i></div>';
+                $html .= '</a>';
+                $html .= '</td>';
+
+                $html .= '</tr>';
             }
-
-            $html .= '<tr>';
-
-            $html .= '<td>' . $person->get_id() . '</td>';
-            $html .= '<td>' . $person->get_vorname() . '</td>';
-            $html .= '<td>' . $person->get_nachname() . '</td>';
-            $html .= '<td>' . $person->get_strasse() . '</td>';
-            $html .= '<td>' . $person->get_plz() . '</td>';
-            $html .= '<td>' . $person->get_ort() . '</td>';
-
-            // bearbeiten icon
-            $html .= '<td>';
-            $html .= '<a href="index.php?edit=' . $key . '">';
-            $html .= '<div class="edit"><i class="fa-solid fa-pen"></i></div>';
-            $html .= '</a>';
-            $html .= '</td>';
-
-            //$tableRowId++;
-            $html .= '</tr>';
         }
         $html .= '</tbody>';
         $html .= '</table>';
