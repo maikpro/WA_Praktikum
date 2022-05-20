@@ -1,10 +1,6 @@
-﻿id;vorname;nachname;straße;plz;ort
-1;hans;meier;hildesheimer str. 123;30539;hannover
-2;jeff;heimer;hamburger str. 12;20148;Hamburg
-3;nina;fleiß;berliner str. 56;33100;Paderborn
+id;vorname;nachname;straße;plz;ort
+1;Max159;meier;"hildesheimer str. 123";30539;hannover
+2;jeff;heimer;"hamburger str. 12";20148;Hamburg
+3;nina;fleiß;"berliner str. 56";33100;Paderborn
 4;Maik;Proba;"Rheiner Landstr. 75";49078;Osnabrück
-5;Hans;Meier;"Teststr. 12";30539;Hannover
-6;Maik;Proba;"Rheiner Landstr. 75";49078;Osnabrück
-7;Maik;Proba;"Rheiner Landstr. 75";49078;Osnabrück
-8;Hans;Meier;"Meierstr. 13";49089;Osnabrück
-9;Hans;"Meier ";"Teststr. 123";342342;"	gegergerg"
+5;Max;Mustermann;"Maststr 34";30880;Laatzen
