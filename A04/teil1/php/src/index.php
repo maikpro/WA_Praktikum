@@ -4,9 +4,11 @@
 <?php $title = 'Home'; ?>
 <?php require_once('./view/header.php'); ?>
 
-<?php require_once('./controller/PersonController.php')
-?>
+<?php require_once('./controller/PersonController.php'); ?>
+<?php require_once('./controller/PDFController.php'); ?>
 
+
+<?php $pdfController = new PDFController(); ?>
 
 <body>
     <div class="container mt-2">
@@ -18,6 +20,7 @@
         </div>
 
         <a href="./form.php"><button type="button" class="btn btn-success">Go to form</button></a>
+        <a href="./pdf.php"><button type="button" class="btn btn-danger"><i class="fa-solid fa-file-pdf"></i> Generate PDF</button></a>
     </div>
 
     <!-- EDIT Modal -->

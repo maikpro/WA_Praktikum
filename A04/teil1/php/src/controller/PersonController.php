@@ -17,6 +17,12 @@ class PersonController
         $this->personView = new PersonView();
     }
 
+    public function get_personarray()
+    {
+        $this->read_csv($this->csv_path);
+        return $this->personArray;
+    }
+
     public function get_selected_person()
     {
         return $this->selected_person;
