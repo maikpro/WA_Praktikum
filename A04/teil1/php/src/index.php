@@ -19,7 +19,7 @@
             ?>
         </div>
 
-        <a href="./form.php"><button type="button" class="btn btn-success">Go to form</button></a>
+        <a href="./form.php"><button type="button" class="btn btn-success"><i class="fa-solid fa-plus"></i> Add Row</button></a>
         <a href="./pdf.php"><button type="button" class="btn btn-danger"><i class="fa-solid fa-file-pdf"></i> Generate PDF</button></a>
     </div>
 

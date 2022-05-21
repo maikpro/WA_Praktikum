@@ -37,7 +37,7 @@
                 <input type="text" class="form-control" name="ort" placeholder="Ort" required>
             </div>
 
-            <button class="btn btn-success" type="submit">Add Row</button>
+            <button class="btn btn-success" type="submit">Save</button>
         </form>
     </div>
 </body>
