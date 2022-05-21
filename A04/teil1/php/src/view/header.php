@@ -12,7 +12,7 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark violet ">
         <div class="container-fluid">
-            <a class="navbar-brand" href="./index.html">
+            <a class="navbar-brand" href="./index.php">
                 <div class="logo">
                     <i class="fa-brands fa-php"></i>
                 </div>
@@ -30,7 +30,7 @@
                         <a class="nav-link <?php if ($title == "Form") { ?>active<? } ?>" href="./form.php">Form</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?php if ($title == "Kalender") { ?>active<? } ?>" href="#">Kalender</a>
+                        <a class="nav-link <?php if ($title == "Kalender") { ?>active<? } ?>" href="./kalender.php">Kalender</a>
                     </li>
 
                 </ul>

@@ -23,3 +23,13 @@ form {
     color: #f03;
     cursor: pointer;
 }
+
+.kalender-control {
+    display: flex;
+    justify-content: space-between;
+}
+
+.monat {
+    display: flex;
+    justify-content: center;
+}
