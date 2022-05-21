@@ -24,12 +24,12 @@ class PersonController
 
     public function displayTable()
     {
-        $this->add_row_to_csv($this->csv_path);
+        $this->add_or_edit_or_delete_csv_row($this->csv_path);
         $this->personView->display($this->read_csv_and_create_table($this->csv_path));
-        $this->open_edit_modal();
+        $this->open_modal();
 
         //Testing..
-        $this->get_array_test();
+        //$this->get_array_test();
     }
 
 
@@ -135,11 +135,28 @@ class PersonController
     /**
      * Fügt eine Zeile hinzu, wenn Daten vom Form gesendet werden.
      */
-    private function add_row_to_csv($csv_path)
+    private function add_or_edit_or_delete_csv_row($csv_path)
     {
+        //ON DELETE
+        if (isset($_POST["_METHOD"]) && $_POST["_METHOD"] == "DELETE" && isset($_POST["id"])) {
+            //echo $_POST["_METHOD"];
+            $id = $_POST["id"];
+
+            $this->read_csv($csv_path);
+            // unset löscht nach index-position!
+            // id !== index-position
+            //unset($this->personArray[$id]);
+
+            $this->personArray = array_filter($this->personArray, function ($person, $key) {
+                return $person->get_id() !== $_POST["id"];
+            }, ARRAY_FILTER_USE_BOTH);
+
+            $this->write_to_csv($csv_path);
+        }
+
         //ON PUT
-        if (isset($_POST["_METHOD"]) && $_POST["_METHOD"] == "PUT" && isset($_POST["id"]) && isset($_POST["vorname"]) && isset($_POST["nachname"]) && isset($_POST["strasse"]) && isset($_POST["plz"]) && isset($_POST["ort"])) {
-            echo $_POST["_METHOD"];
+        else if (isset($_POST["_METHOD"]) && $_POST["_METHOD"] == "PUT" && isset($_POST["id"]) && isset($_POST["vorname"]) && isset($_POST["nachname"]) && isset($_POST["strasse"]) && isset($_POST["plz"]) && isset($_POST["ort"])) {
+            //echo $_POST["_METHOD"];
 
             $id = $_POST["id"];
             $vorname = $_POST["vorname"];
@@ -158,11 +175,12 @@ class PersonController
 
         // ON POST
         else if (isset($_POST["vorname"]) && isset($_POST["nachname"]) && isset($_POST["strasse"]) && isset($_POST["plz"]) && isset($_POST["ort"])) {
-            echo '<p>' . $_POST["vorname"] . '</p>';
+            //echo "POST";
+            /*echo '<p>' . $_POST["vorname"] . '</p>';
             echo '<p>' . $_POST["nachname"] . '</p>';
             echo '<p>' . $_POST["strasse"] . '</p>';
             echo '<p>' . $_POST["plz"] . '</p>';
-            echo '<p>' . $_POST["ort"] . '</p>';
+            echo '<p>' . $_POST["ort"] . '</p>';*/
 
             $vorname = $_POST["vorname"];
             $nachname = $_POST["nachname"];
@@ -191,16 +209,24 @@ class PersonController
     private function get_last_id($csv_path)
     {
         $file = file($csv_path); //read only
+        if (count($file) == 1) {
+            return 0;
+        }
+
         $last_row = array_pop($file);
-        return $last_row[0]; // id from last row
+        return intval($last_row[0]); // id from last row
     }
 
-    private function open_edit_modal()
+    private function open_modal()
     {
         if (isset($_GET["edit"])) {
             $id = $_GET["edit"];
             $this->selected_person = $this->personArray[$id];
-            echo '<h1>' . $this->selected_person . '</h1>';
+            //echo '<h1>' . $this->selected_person . '</h1>';
+        } else if (isset($_GET["delete"])) {
+            $id = $_GET["delete"];
+            $this->selected_person = $this->personArray[$id];
+            //echo '<h1>' . $this->selected_person . '</h1>';
         }
     }
 

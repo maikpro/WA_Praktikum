@@ -4,7 +4,8 @@
 <?php $title = 'Home'; ?>
 <?php require_once('./view/header.php'); ?>
 
-<?php require_once('./controller/PersonController.php') ?>
+<?php require_once('./controller/PersonController.php')
+?>
 
 
 <body>
@@ -31,36 +32,41 @@
                 <!--BEARBEITEN FORM-->
                 <form action="./index.php" method="POST">
                     <div class="modal-body">
+                        <?php if ($personController->get_selected_person() !== null) { ?>
+                            <div class="input-group mb-3">
+                                <input type="hidden" class="form-control" name="_METHOD" value="PUT">
+                            </div>
 
-                        <!--Workaround da in HTML PUT nicht existiert!-->
-                        <input type="hidden" name="_METHOD" value="PUT" />
 
-                        <input type="hidden" name="id" value="<?php echo $personController->get_selected_person()->get_id() ?>" readonly>
+                            <div class="input-group mb-3">
+                                <input type="hidden" class="form-control" name="id" value="<?php echo $personController->get_selected_person()->get_id() ?>" readonly>
+                            </div>
 
-                        <!--Vorname-->
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" name="vorname" placeholder="Vorname" value="<?php echo $personController->get_selected_person()->get_vorname() ?>" required>
-                        </div>
+                            <!--Vorname-->
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" name="vorname" placeholder="Vorname" value="<?php echo $personController->get_selected_person()->get_vorname() ?>" required>
+                            </div>
 
-                        <!--Nachname-->
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" name="nachname" placeholder="Nachname" value="<?php echo $personController->get_selected_person()->get_nachname() ?>" required>
-                        </div>
+                            <!--Nachname-->
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" name="nachname" placeholder="Nachname" value="<?php echo $personController->get_selected_person()->get_nachname() ?>" required>
+                            </div>
 
-                        <!--Straße-->
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" name="strasse" placeholder="Straße & Hausnummer" value="<?php echo $personController->get_selected_person()->get_strasse() ?>" required>
-                        </div>
+                            <!--Straße-->
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" name="strasse" placeholder="Straße & Hausnummer" value="<?php echo $personController->get_selected_person()->get_strasse() ?>" required>
+                            </div>
 
-                        <!--PLZ-->
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" name="plz" placeholder="PLZ" value="<?php echo $personController->get_selected_person()->get_plz() ?>" required>
-                        </div>
+                            <!--PLZ-->
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" name="plz" placeholder="PLZ" value="<?php echo $personController->get_selected_person()->get_plz() ?>" required>
+                            </div>
 
-                        <!--Ort-->
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" name="ort" placeholder="Ort" value="<?php echo $personController->get_selected_person()->get_ort() ?>" required>
-                        </div>
+                            <!--Ort-->
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" name="ort" placeholder="Ort" value="<?php echo $personController->get_selected_person()->get_ort() ?>" required>
+                            </div>
+                        <?php } ?>
 
                     </div>
 
@@ -73,30 +79,31 @@
         </div>
     </div>
 
-
     <!--DELETE MODAL-->
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-        Launch demo modal
-    </button>
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <h5 class="modal-title" id="deleteModalLabel"><?php echo "'" . $personController->get_selected_person()->get_vorname() . " " . $personController->get_selected_person()->get_nachname() . "'"  ?> löschen</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+                <?php if ($personController->get_selected_person() !== null) { ?>
+                    <div class="modal-body">
+                        Wollen Sie die Person <?php echo "'" . $personController->get_selected_person()->get_vorname() . " " . $personController->get_selected_person()->get_nachname() . "'"  ?> wirklich löschen?
+                    </div>
+                    <div class="modal-footer">
+                        <form action="./index.php" method="post">
+                            <div class="input-group mb-3">
+                                <input type="hidden" class="form-control" name="_METHOD" value="DELETE">
+                                <input type="hidden" class="form-control" name="id" value="<?php echo $personController->get_selected_person()->get_id() ?>" readonly>
+                            </div>
+                            <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Löschen</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
+                        </form>
+                    </div>
+                <?php } ?>
             </div>
         </div>
     </div>
