@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="de">
 
-<?php $title = 'Kalender'; ?>
-<?php require_once('./view/header.php'); ?>
-<?php require_once('./controller/KalenderController.php');
+<?php
+date_default_timezone_set('Europe/Berlin');
+
+$title = 'Kalender';
+require_once('./view/header.php');
+require_once('./controller/KalenderController.php');
 $kalenderController = new KalenderController();
 ?>
 
@@ -11,15 +14,18 @@ $kalenderController = new KalenderController();
     <div class="container mt-2">
 
         <div class="kalender-control">
-            <!--<a href="./kalender.php"><button type="button" class="btn btn-primary">vorheriges Jahr</button></a>-->
-            <a href="./kalender.php"><button type="button" class="btn btn-primary">vorheriger Monat</button></a>
+            <a href="./kalender.php?prev_year&month=<?php echo $kalenderController->get_selected_month(); ?>&year=<?php echo $kalenderController->get_prev_year(); ?>"><button type="button" class="btn btn-primary">vorheriges Jahr</button></a>
+            <a href="./kalender.php?next_year&month=<?php echo $kalenderController->get_selected_month(); ?>&year=<?php echo $kalenderController->get_next_year(); ?>"><button type="button" class="btn btn-primary">nächstes Jahr</button></a>
+        </div>
+
+        <div class="kalender-control mt-3">
+            <a href="./kalender.php?prev&month=<?php echo $kalenderController->get_prev_month(); ?>&year=<?php echo $kalenderController->get_prev_month_year(); ?>"><button type="button" class="btn btn-primary">vorheriger Monat</button></a>
             <a href="./kalender.php"><button type="button" class="btn btn-primary">aktueller Monat</button></a>
-            <a href="./kalender.php"><button type="button" class="btn btn-primary">nächster Monat</button></a>
-            <!--<a href="./kalender.php"><button type="button" class="btn btn-primary">nächstes Jahr</button></a>-->
+            <a href="./kalender.php?next&month=<?php echo $kalenderController->get_next_month(); ?>&year=<?php echo $kalenderController->get_next_month_year(); ?>"><button type="button" class="btn btn-primary">nächster Monat</button></a>
         </div>
 
         <div class="monat mt-4 mb-4">
-            <h2><?php echo $kalenderController->get_current_month_string() . " " . $kalenderController->get_current_year() ?><h2>
+            <h2><?php echo $kalenderController->get_selected_month_string() . " " . $kalenderController->get_selected_year() ?><h2>
         </div>
 
         <!--Book Table-->
@@ -37,18 +43,7 @@ $kalenderController = new KalenderController();
                 </tr>
             </thead>
             <tbody>
-                <!--<tr>
-                    <th scope="row">01</th>
-                    <td>01</td>
-                    <td>02</td>
-                    <td>03</td>
-                    <td>04</td>
-                    <td>05</td>
-                    <td>06</td>
-                    <td>07</td>
-                </tr>-->
-
-                <?php echo $kalenderController->printCalender(); ?>
+                <?php echo $kalenderController->printCalender($kalenderController->get_selected_month(), $kalenderController->get_selected_year()); ?>
             </tbody>
         </table>
 
