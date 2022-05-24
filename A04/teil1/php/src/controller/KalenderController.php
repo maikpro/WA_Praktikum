@@ -96,6 +96,7 @@ class KalenderController
             $year = $_GET["year"];
 
             $this->set_selected_year($year);
+            $this->set_next_year($this->selected_year + 1);
             $this->set_prev_year($this->selected_year - 1);
 
             // update selected month
@@ -183,6 +184,7 @@ class KalenderController
 
             $this->set_selected_year($year);
             $this->set_next_year($this->selected_year + 1);
+            $this->set_prev_year($this->selected_year - 1);
 
             // update selected month
             $this->set_selected_month($month);
@@ -277,19 +279,24 @@ class KalenderController
         // füllt leere Tage im Kalender aus bis zum ersten Wochentag des Monats
         $html .= str_repeat("<td></td>", $startDay);
 
+        // End of Week or Month
         for ($d = 1; $d <= $lastDay; $d++) {
-            // End of Week or Month
-            for ($d = 1; $d <= $lastDay; $d++) {
-                $html .= "<td>" . $d . "</td>";
-                $startDay++;
 
-                if ($startDay > 6 && $d < $lastDay) {
-                    $startDay = 0;
-                    $html .= "</tr>";
-                    $html .= "<tr>";
-                    $html .= '<th scope="row">' . $weekNumber . '</th>';
-                    $weekNumber++;
-                }
+            if ($this->get_current_day() == $d && $this->get_current_month() == $month && $this->get_current_year() == $year) {
+                // Markiere den heutigen Tag
+                $html .= "<td id='today'>" . $d . "</td>";
+            } else {
+                $html .= "<td>" . $d . "</td>";
+            }
+
+            $startDay++;
+
+            if ($startDay > 6 && $d < $lastDay) {
+                $startDay = 0;
+                $html .= "</tr>";
+                $html .= "<tr>";
+                $html .= '<th scope="row">' . $weekNumber . '</th>';
+                $weekNumber++;
             }
         }
 

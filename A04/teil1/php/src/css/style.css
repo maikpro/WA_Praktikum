@@ -33,3 +33,12 @@ form {
     display: flex;
     justify-content: center;
 }
+
+td {
+    height: 100px;
+    border: 1px solid #fff;
+}
+
+#today {
+    background-color: yellow;
+}
