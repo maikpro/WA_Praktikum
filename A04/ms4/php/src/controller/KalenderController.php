@@ -46,7 +46,10 @@ class KalenderController
     public function get_selected_month_string()
     {
         // hier nochmal mit selected year updaten!!!
-        return date('M', mktime(0, 0, 0, $this->selected_month, 1, $this->get_current_year()));
+        $timestamp = mktime(0, 0, 0, $this->selected_month, 1, $this->get_current_year());
+        //return date('F', mktime(0, 0, 0, $this->selected_month, 1, $this->get_current_year()));
+
+        return strftime('%B', $timestamp);
     }
 
     public function set_selected_year($selected_year)

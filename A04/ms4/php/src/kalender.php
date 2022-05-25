@@ -4,6 +4,8 @@
 <?php
 date_default_timezone_set('Europe/Berlin');
 
+setlocale(LC_TIME, 'de_DE.utf8');
+
 $title = 'Kalender';
 require_once('./view/header.php');
 require_once('./controller/KalenderController.php');
@@ -14,14 +16,14 @@ $kalenderController = new KalenderController();
     <div class="container mt-2">
 
         <div class="kalender-control">
-            <a href="./kalender.php?prev_year&month=<?php echo $kalenderController->get_selected_month(); ?>&year=<?php echo $kalenderController->get_prev_year(); ?>"><button type="button" class="btn btn-primary">vorheriges Jahr</button></a>
-            <a href="./kalender.php?next_year&month=<?php echo $kalenderController->get_selected_month(); ?>&year=<?php echo $kalenderController->get_next_year(); ?>"><button type="button" class="btn btn-primary">nächstes Jahr</button></a>
+            <a href="./kalender.php?prev_year&month=<?php echo $kalenderController->get_selected_month(); ?>&year=<?php echo $kalenderController->get_prev_year(); ?>"><button type="button" class="btn btn-success"><i class="fa-solid fa-arrow-left"></i> vorheriges Jahr</button></a>
+            <a href="./kalender.php?next_year&month=<?php echo $kalenderController->get_selected_month(); ?>&year=<?php echo $kalenderController->get_next_year(); ?>"><button type="button" class="btn btn-success">nächstes Jahr <i class="fa-solid fa-arrow-right"></i></button></a>
         </div>
 
         <div class="kalender-control mt-3">
-            <a href="./kalender.php?prev&month=<?php echo $kalenderController->get_prev_month(); ?>&year=<?php echo $kalenderController->get_prev_month_year(); ?>"><button type="button" class="btn btn-primary">vorheriger Monat</button></a>
-            <a href="./kalender.php"><button type="button" class="btn btn-primary">aktueller Monat</button></a>
-            <a href="./kalender.php?next&month=<?php echo $kalenderController->get_next_month(); ?>&year=<?php echo $kalenderController->get_next_month_year(); ?>"><button type="button" class="btn btn-primary">nächster Monat</button></a>
+            <a href="./kalender.php?prev&month=<?php echo $kalenderController->get_prev_month(); ?>&year=<?php echo $kalenderController->get_prev_month_year(); ?>"><button type="button" class="btn btn-primary"><i class="fa-solid fa-arrow-left"></i> vorheriger Monat</button></a>
+            <a href="./kalender.php"><button type="button" class="btn btn-primary"><i class="fa-solid fa-calendar-day"></i> aktueller Monat</button></a>
+            <a href="./kalender.php?next&month=<?php echo $kalenderController->get_next_month(); ?>&year=<?php echo $kalenderController->get_next_month_year(); ?>"><button type="button" class="btn btn-primary">nächster Monat <i class="fa-solid fa-arrow-right"></i></button></a>
         </div>
 
         <div class="monat mt-4 mb-4">
