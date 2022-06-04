@@ -8,6 +8,10 @@
             <tr>
                 <th>Name</th>
                 <th>Beschreibung</th>
+                <th>Schiffstyp</th>
+                <th>Breite</th>
+                <th>Länge</th>
+                <th>Schiffsbesatzung</th>
                 <th>BRT</th>
                 <th>Bearbeiten</th>
             </tr>
@@ -17,6 +21,10 @@
                 <tr>
                     <td>{{ $ship->name }}</td>
                     <td>{{ $ship->description }}</td>
+                    <td>{{ $ship->shiptype }}</td>
+                    <td>{{ $ship->width }}</td>
+                    <td>{{ $ship->length }}</td>
+                    <td>{{ $ship->crew }}</td>
                     <td>{{ $ship->brt }}</td>
                     <td>
                         <a href="{{ url('ships/show/' . $ship->id) }}" class="btn btn-success">Show</a>

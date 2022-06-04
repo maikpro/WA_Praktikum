@@ -17,7 +17,11 @@ class CreateShips extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('description')->nullable();
-            $table->float('brt')->default(0.0);
+            $table->string('shiptype')->nullable();
+            $table->float('width')->default(0.0);
+            $table->float('length')->default(0.0);
+            $table->integer('crew')->default(0); //Schiffsbesatzung
+            $table->float('brt')->default(0.0); // BRT => (BruttoRegisterTonne - nutzbarer Rauminhalt eines Schiffes)
             $table->timestamps();
         });
     }

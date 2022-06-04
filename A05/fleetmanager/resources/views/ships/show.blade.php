@@ -16,6 +16,10 @@
             <tr>
                 <th>{{ $entity->name }}</th>
                 <th>{{ $entity->description }}</th>
+                <th>{{ $entity->shiptype }}</th>
+                <th>{{ $entity->width }}</th>
+                <th>{{ $entity->length }}</th>
+                <th>{{ $entity->crew }}</th>
                 <th>{{ $entity->brt }}</th>
                 <th></th>
             </tr>

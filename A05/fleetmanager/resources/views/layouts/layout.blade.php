@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,18 +9,23 @@
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
-  <!-- Scripts -->
-  <script src="{{ asset('js/app.js') }}" defer></script>
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <title>Schiffsdatenbank</title>
-  </head>
-  <body>
-    <form method="post" action="{{url('logout')}}">
-      @csrf
-      <input type="submit" class="btn btn-danger" value="Abmelden">
+</head>
+
+<body>
+    <form method="post" action="{{ url('logout') }}">
+        @csrf
+        <input type="submit" class="btn btn-danger" value="Abmelden">
     </form>
-    <div class="container">
-        @yield('content')
+    <div class="container-fluid">
+        <div class="p-5">
+            @yield('content')
+        </div>
+
     </div>
 
-  </body>
+</body>
+
 </html>
