@@ -42,5 +42,17 @@ class DatabaseSeeder extends Seeder
             'crew' => 1015,
             'brt' => 70.327
         ]);
+
+        // Testdaten für Hersteller
+        DB::table('manufacturers')->insert([
+            'name' => 'Harland & Wolff',
+            'founding' => 1851,
+            'location' => 'Belfast, Nordirland'
+        ]);
+
+        //Testdaten für Modell
+        DB::table('shipmodels')->insert([
+            'name' => 'Olympic-Klasse',
+        ]);
     }
 }

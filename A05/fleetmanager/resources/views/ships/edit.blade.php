@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 
 @section('content')
-    <h1>Schiff hinzufügen</h1>
+    <h1>Schiff bearbeiten</h1>
     @include('snippets.error')
     {!! Form::model($entity, ['url' => 'ships/update/' . $entity->id]) !!}
     {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Schiffsname...']) !!}

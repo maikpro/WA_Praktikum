@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ShipController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\ManufacturerController;
+use App\Http\Controllers\ShipmodelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +20,9 @@ use App\Http\Controllers\BookController;
 
 Route::get('/', function() {
     //return redirect('books');
-    return redirect('ships');
+    //return redirect('ships');
+    //return redirect('manufacturers');
+    return redirect('shipmodels');
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -31,6 +35,28 @@ Route::middleware(['auth'])->group(function () {
     Route::post('ships/update/{id}', [ShipController::class, 'postUpdate']);
     Route::get('ships/delete/{id}', [ShipController::class, 'getDelete']);
     Route::get('ships/json', [ShipController::class, 'getJson']);
+
+    //Hersteller
+    Route::get('manufacturers', [ManufacturerController::class, 'getIndex']);
+    Route::get('manufacturers/index', [ManufacturerController::class, 'getIndex']);
+    Route::get('manufacturers/show/{id}', [ManufacturerController::class, 'getShow']);
+    Route::get('manufacturers/add', [ManufacturerController::class, 'getAdd']);
+    Route::post('manufacturers/save', [ManufacturerController::class, 'postSave']);
+    Route::get('manufacturers/edit/{id}', [ManufacturerController::class, 'getEdit']);
+    Route::post('manufacturers/update/{id}', [ManufacturerController::class, 'postUpdate']);
+    Route::get('manufacturers/delete/{id}', [ManufacturerController::class, 'getDelete']);
+    Route::get('manufacturers/json', [ManufacturerController::class, 'getJson']);
+
+    // Modelle
+    Route::get('shipmodels', [ShipmodelController::class, 'getIndex']);
+    Route::get('shipmodels/index', [ShipmodelController::class, 'getIndex']);
+    Route::get('shipmodels/show/{id}', [ShipmodelController::class, 'getShow']);
+    Route::get('shipmodels/add', [ShipmodelController::class, 'getAdd']);
+    Route::post('shipmodels/save', [ShipmodelController::class, 'postSave']);
+    Route::get('shipmodels/edit/{id}', [ShipmodelController::class, 'getEdit']);
+    Route::post('shipmodels/update/{id}', [ShipmodelController::class, 'postUpdate']);
+    Route::get('shipmodels/delete/{id}', [ShipmodelController::class, 'getDelete']);
+    Route::get('shipmodels/json', [ShipmodelController::class, 'getJson']);
 
     Route::get('books', [BookController::class, 'getIndex']);
     Route::get('books/index', [BookController::class, 'getIndex']);
