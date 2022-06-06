@@ -7,6 +7,12 @@
     {!! Form::open(['url' => 'shipmodels/save']) !!}
     {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Modellname...']) !!}
     <br />
+
+
+    {!! Form::select('manufacturer_id', $manufacturers) !!}
+    <br />
+
+
     {!! Form::submit('Speichern', ['class' => 'btn btn-success']) !!}
     <a href="{{ url('manufacturers') }}" class="btn btn-danger">Abbrechen</a>
     {!! Form::close() !!}

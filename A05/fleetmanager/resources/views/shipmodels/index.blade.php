@@ -7,12 +7,14 @@
         <thead>
             <tr>
                 <th>Name</th>
+                <th>Hersteller</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($entities as $index => $shipmodel)
                 <tr>
                     <td>{{ $shipmodel->name }}</td>
+                    <td>{{ $shipmodel->manufacturer->name }}</td>
                     <td>
                         <a href="{{ url('shipmodels/show/' . $shipmodel->id) }}" class="btn btn-success">Show</a>
                         <a href="{{ url('shipmodels/edit/' . $shipmodel->id) }}" class="btn btn-success">Edit</a>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Manufacturer;
+use App\Models\Shipmodel;
 
 class ManufacturerController extends Controller
 {
