@@ -9,6 +9,7 @@
                 <th>Name</th>
                 <th>Gründung</th>
                 <th>Sitz</th>
+                <th>Shipmodel_name</th>
             </tr>
         </thead>
         <tbody>
@@ -17,6 +18,7 @@
                     <td>{{ $manufacturer->name }}</td>
                     <td>{{ $manufacturer->founding }}</td>
                     <td>{{ $manufacturer->location }}</td>
+                    <td>{{ $manufacturer->shipmodels[0]->name }}</td>
                     <td>
                         <a href="{{ url('manufacturers/show/' . $manufacturer->id) }}" class="btn btn-success">Show</a>
                         <a href="{{ url('manufacturers/edit/' . $manufacturer->id) }}" class="btn btn-success">Edit</a>

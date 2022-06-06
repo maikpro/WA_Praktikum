@@ -45,14 +45,31 @@ class DatabaseSeeder extends Seeder
 
         // Testdaten für Hersteller
         DB::table('manufacturers')->insert([
+            //'shipmodel_id' => 1,
             'name' => 'Harland & Wolff',
             'founding' => 1851,
             'location' => 'Belfast, Nordirland'
         ]);
 
+        DB::table('manufacturers')->insert([
+            //'shipmodel_id' => 2,
+            'name' => 'Hersteller 2',
+            'founding' => 1998,
+            'location' => 'Hamburg, Germany'
+        ]);
+
         //Testdaten für Modell
         DB::table('shipmodels')->insert([
             'name' => 'Olympic-Klasse',
+            'manufacturer_id' => 1
         ]);
+        DB::table('shipmodels')->insert([
+            'name' => 'Anderes Modell',
+            'manufacturer_id' => 2
+        ]);
+
+
+
+
     }
 }

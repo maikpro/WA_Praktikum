@@ -15,6 +15,11 @@ class CreateShipmodelsTable extends Migration
     {
         Schema::create('shipmodels', function (Blueprint $table) {
             $table->id();
+
+            //Foreign Key für Hersteller
+            $table->integer('manufacturer_id')->unsigned()->index();
+            $table->foreign('manufacturer_id')->references('id')->on('manufacturers');
+
             $table->string('name')->nullable();
             $table->timestamps();
         });
