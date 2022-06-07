@@ -15,6 +15,11 @@ class CreateShips extends Migration
     {
         Schema::create('ships', function (Blueprint $table) {
             $table->id();
+
+            // Foreign Key für Shipmodell
+            $table->integer('shipmodel_id')->unsigned()->index();
+            $table->foreign('shipmodel_id')->references('id')->on('shipmodels');
+
             $table->string('name')->nullable();
             $table->string('description')->nullable();
             $table->string('shiptype')->nullable();

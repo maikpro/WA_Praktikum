@@ -7,6 +7,10 @@
     {!! Form::open(['url' => 'ships/save']) !!}
     {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Schiffsname...']) !!}
     <br />
+
+    {!! Form::select('shipmodel_id', $shipmodels) !!}
+    <br />
+
     {!! Form::text('description', null, ['class' => 'form-control', 'placeholder' => 'Beschreibung...']) !!}
     <br />
     {!! Form::text('shiptype', null, ['class' => 'form-control', 'placeholder' => 'Schiffstyp...']) !!}

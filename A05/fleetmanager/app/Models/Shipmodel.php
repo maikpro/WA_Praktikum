@@ -9,4 +9,9 @@ class Shipmodel extends Model
         return $this->belongsTo(Manufacturer::class);
         //return $this->hasMany(Manufacturer::class);
     }
+
+    public function ships()
+    {
+        return $this->hasMany(Ship::class);
+    }
 }

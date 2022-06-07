@@ -7,6 +7,7 @@
         <thead>
             <tr>
                 <th>Name</th>
+                <th>Schiffsmodell</th>
                 <th>Beschreibung</th>
                 <th>Schiffstyp</th>
                 <th>Breite</th>
@@ -20,6 +21,7 @@
             @foreach ($entities as $index => $ship)
                 <tr>
                     <td>{{ $ship->name }}</td>
+                    <td>{{ $ship->shipmodel->name }}</td>
                     <td>{{ $ship->description }}</td>
                     <td>{{ $ship->shiptype }}</td>
                     <td>{{ $ship->width }}</td>

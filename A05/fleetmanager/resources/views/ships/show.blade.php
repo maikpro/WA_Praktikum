@@ -6,21 +6,26 @@
         <thead>
             <tr>
                 <th>Name</th>
+                <th>Schiffsmodell</th>
                 <th>Beschreibung</th>
+                <th>Schiffstyp</th>
+                <th>Breite</th>
+                <th>Länge</th>
+                <th>Schiffsbesatzung</th>
                 <th>BRT</th>
-                <th>Bearbeiten</th>
             </tr>
         </thead>
         <tbody>
 
             <tr>
-                <th>{{ $entity->name }}</th>
-                <th>{{ $entity->description }}</th>
-                <th>{{ $entity->shiptype }}</th>
-                <th>{{ $entity->width }}</th>
-                <th>{{ $entity->length }}</th>
-                <th>{{ $entity->crew }}</th>
-                <th>{{ $entity->brt }}</th>
+                <td>{{ $entity->name }}</td>
+                <td>{{ $entity->shipmodel->name }}</td>
+                <td>{{ $entity->description }}</td>
+                <td>{{ $entity->shiptype }}</td>
+                <td>{{ $entity->width }}</td>
+                <td>{{ $entity->length }}</td>
+                <td>{{ $entity->crew }}</td>
+                <td>{{ $entity->brt }}</td>
                 <th></th>
             </tr>
 
