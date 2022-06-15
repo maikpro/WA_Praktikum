@@ -10,13 +10,11 @@ class ManufacturerController extends Controller
 {
     protected $className = 'App\Models\Manufacturer';
     protected $entityName = 'manufacturers';
-    protected $fields = ['name', 'founding', 'location', 'shipmodel_id', 'shipmodel_name'];
+    protected $fields = ['name', 'founding', 'location'];
     protected $validation = [
         'name' => 'required',
         'founding' => 'required',
         'location' => 'required',
-        'shipmodel_id' => 'required',
-        'shipmodel_name' => 'required'
     ];
     //
 }

@@ -9,7 +9,7 @@
     <br />
 
 
-    {!! Form::select('manufacturer_id', $manufacturers) !!}
+    {!! Form::select('manufacturer_id', $manufacturers, null, ['class' => 'form-select']) !!}
     <br />
 
 

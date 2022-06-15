@@ -20,9 +20,9 @@ use App\Http\Controllers\ShipmodelController;
 
 Route::get('/', function() {
     //return redirect('books');
-    //return redirect('ships');
+    return redirect('ships');
     //return redirect('manufacturers');
-    return redirect('shipmodels');
+    //return redirect('shipmodels');
 });
 
 Route::middleware(['auth'])->group(function () {

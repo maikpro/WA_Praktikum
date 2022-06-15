@@ -8,7 +8,7 @@
     {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Schiffsname...']) !!}
     <br />
 
-    {!! Form::select('shipmodel_id', $shipmodels) !!}
+    {!! Form::select('shipmodel_id', $shipmodels, null, ['class' => 'form-select']) !!}
     <br />
 
     {!! Form::text('description', null, ['class' => 'form-control', 'placeholder' => 'Beschreibung...']) !!}

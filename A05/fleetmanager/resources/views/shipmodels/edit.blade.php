@@ -7,7 +7,7 @@
     {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Modellname...']) !!}
     <br />
 
-    {!! Form::select('manufacturer_id', $manufacturers) !!}
+    {!! Form::select('manufacturer_id', $manufacturers, null, ['class' => 'form-select']) !!}
     <br />
 
     {!! Form::submit('Speichern', ['class' => 'btn btn-success']) !!}
